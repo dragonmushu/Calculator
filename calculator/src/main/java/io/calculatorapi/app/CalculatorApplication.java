@@ -7,7 +7,6 @@ import io.calculatorapi.exceptionhandler.ServiceExceptionHandler;
 import io.calculatorapi.resources.CalculatorResource;
 import io.confluent.rest.Application;
 import io.confluent.rest.validation.JacksonMessageBodyProvider;
-import io.swagger.jaxrs.listing.ApiListingResource;
 
 import java.io.File;
 
@@ -24,9 +23,8 @@ public class CalculatorApplication extends Application<CalculatorAppRestConfig> 
         JacksonMessageBodyProvider jsonProvider = new JacksonMessageBodyProvider(jsonMapper);
 
         context.register(jsonProvider);
-        context.register(ApiListingResource.class);
-        context.register(ServiceExceptionHandler.class);
-        context.register(CalculatorResource.class);
+        context.register(new ServiceExceptionHandler());
+        context.register(new CalculatorResource());
     }
 
     public static void main(String[] args) {

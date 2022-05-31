@@ -1,1 +1,4 @@
 */.idea/
+/calculator/target/*
+*DS_Store*
+*.gcloudignore

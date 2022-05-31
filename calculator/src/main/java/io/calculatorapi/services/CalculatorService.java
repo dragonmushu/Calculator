@@ -27,7 +27,7 @@ public class CalculatorService {
 
     private List<ResultDto> toAuditLogs() {
         List<ResultDto> auditLogs = new ArrayList<ResultDto>();
-        for (Operation operation: operations) {
+        for (Operation operation: this.operations) {
             auditLogs.add(toResultDto(operation));
         }
 
