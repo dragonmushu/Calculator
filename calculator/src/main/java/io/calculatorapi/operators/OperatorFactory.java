@@ -11,6 +11,6 @@ public class OperatorFactory {
             case DIVIDE: return new Divide();
         }
 
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("No such operator exists");
     }
 }

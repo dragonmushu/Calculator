@@ -10,10 +10,8 @@ import java.util.List;
 
 public class Operation {
     private OperatorType operatorType;
-
     private Operator operator;
     private List<Double> operand;
-
     private Double result;
 
     public Operation(OperatorType operatorType, double firstOperand, double secondOperand) {

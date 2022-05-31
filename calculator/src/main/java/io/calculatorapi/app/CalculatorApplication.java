@@ -1,17 +1,13 @@
 package io.calculatorapi.app;
 
-
 import javax.ws.rs.core.Configurable;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.calculatorapi.exceptionhandler.ServiceExceptionHandler;
 import io.calculatorapi.resources.CalculatorResource;
 import io.confluent.rest.Application;
-import io.confluent.rest.RestConfig;
-import io.confluent.rest.RestConfigException;
 import io.confluent.rest.validation.JacksonMessageBodyProvider;
-import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
-import io.swagger.jaxrs.listing.SwaggerSerializers;
 
 import java.io.File;
 
@@ -29,16 +25,8 @@ public class CalculatorApplication extends Application<CalculatorAppRestConfig> 
 
         context.register(jsonProvider);
         context.register(ApiListingResource.class);
-        context.register(SwaggerSerializers.class);
-        context.register(new CalculatorResource());
-
-        BeanConfig beanConfig = new BeanConfig();
-        beanConfig.setVersion("1.0.0");
-        beanConfig.setSchemes(new String[]{"http"});
-        beanConfig.setHost("localhost:8080");
-        beanConfig.setBasePath("/v1/calculator");
-        beanConfig.setScan(true);
-
+        context.register(ServiceExceptionHandler.class);
+        context.register(CalculatorResource.class);
     }
 
     public static void main(String[] args) {

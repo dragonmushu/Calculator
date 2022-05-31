@@ -3,7 +3,6 @@ package io.calculatorapi.operators;
 import java.util.List;
 
 public abstract class BaseOperator implements Operator {
-
     @Override
     public Double Evaluate(List<Double> operands) {
         Double result = operands.get(0);
@@ -12,7 +11,7 @@ public abstract class BaseOperator implements Operator {
         }
 
         if (Double.isNaN(result) || Double.isInfinite(result)) {
-            throw new ArithmeticException();
+            throw new ArithmeticException("Invalid operation.");
         }
 
         return result;

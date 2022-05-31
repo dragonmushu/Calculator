@@ -1,12 +1,10 @@
 package io.calculatorapi.client;
 
-
 import io.calculatorapi.dto.ResultDto;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-
 
 public interface CalculatorRestApi {
     @POST("v1/calculator/evaluate/add")

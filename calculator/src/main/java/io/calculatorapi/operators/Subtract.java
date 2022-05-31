@@ -1,7 +1,5 @@
 package io.calculatorapi.operators;
 
-import java.util.List;
-
 public class Subtract extends BaseOperator {
 
     @Override
