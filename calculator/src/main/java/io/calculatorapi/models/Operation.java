@@ -41,7 +41,7 @@ public class Operation {
         for (Double op: this.operand) {
             operands.add(String.valueOf(op));
         }
-        return String.join(" + ", operands);
+        return String.join(" " + operator.OperatorCharacter() + " ", operands);
     }
 
     private Double evaluate() {

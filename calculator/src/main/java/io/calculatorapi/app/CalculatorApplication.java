@@ -13,15 +13,17 @@ import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
 
+import java.io.File;
 
-public class CalculatorApplication extends Application<RestConfig> {
+public class CalculatorApplication extends Application<CalculatorAppRestConfig> {
+    public static final String BASE_API_PATH = "/v1/calculator";
+
     public CalculatorApplication() {
-        super(new RestConfig(RestConfig.baseConfigDef().define(RestConfig.AUTHENTICATION_METHOD_CONFIG, RestConfig.AUTHENTICATION_METHOD_BASIC))., "/v1/calculator");
+        super(new CalculatorAppRestConfig(), BASE_API_PATH);
     }
 
     @Override
-    public void setupResources(Configurable<?> context, RestConfig config) {
-
+    public void setupResources(Configurable<?> context, CalculatorAppRestConfig config) {
         ObjectMapper jsonMapper = new ObjectMapper();
         JacksonMessageBodyProvider jsonProvider = new JacksonMessageBodyProvider(jsonMapper);
 
@@ -41,13 +43,18 @@ public class CalculatorApplication extends Application<RestConfig> {
 
     public static void main(String[] args) {
         try {
+
+            // configure jaas config file
+            File file = new File("src/main/resources/jaas.conf");
+            String path = file.getAbsolutePath();
+            System.setProperty("java.security.auth.login.config", path);
+
+            // start application
             CalculatorApplication app = new CalculatorApplication();
             app.start();
             app.join();
-        } catch (RestConfigException e) {
-            System.exit(1);
         } catch (Exception e) {
+            System.exit(1);
         }
     }
-
 }

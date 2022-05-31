@@ -6,4 +6,6 @@ public interface Operator {
     public Double Evaluate(List<Double> operands);
 
     public Double Evaluate(double firstOperand, double secondOperand);
+
+    public String OperatorCharacter();
 }
