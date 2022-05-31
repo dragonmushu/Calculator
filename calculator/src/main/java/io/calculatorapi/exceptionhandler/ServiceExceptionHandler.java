@@ -10,10 +10,10 @@ public class ServiceExceptionHandler implements ExceptionMapper<Exception> {
     public Response toResponse(Exception e) {
         e.printStackTrace();
 
-        var internalServerErrorCode = Response.Status.INTERNAL_SERVER_ERROR.getStatusCode();
+        var badRequestStatusCode = Response.Status.BAD_REQUEST.getStatusCode();
         return Response
-            .serverError()
-            .entity(new ErrorMessage(internalServerErrorCode, e.getMessage()))
+            .status(badRequestStatusCode)
+            .entity(new ErrorMessage(badRequestStatusCode, e.getMessage()))
             .build();
     }
 }
