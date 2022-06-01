@@ -1,12 +1,8 @@
 # Calculator Service
 
-----
-
 Simple service to evaluate expressions. It is dependent on rest-utils and contains simple authn on some endpoints.
 
 # Local Build Tips
-
-----
 
 ## Build
 
@@ -22,6 +18,12 @@ Simple service to evaluate expressions. It is dependent on rest-utils and contai
 
     cd calculator
     mvn test
+
+# Swagger Endpoint
+
+Open a browser and input the following endpoint:
+
+    http://localhost:8080/openapi/swagger-ui/index.html
 
 ## Endpoints
 
