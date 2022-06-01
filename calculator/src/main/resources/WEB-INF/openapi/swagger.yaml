@@ -1,0 +1,80 @@
+swagger: "2.0"
+info:
+  description: "This is a simple api for Calculator service"
+  version: "1.0.0"
+  title: "Calculator Service API"
+host: "localhost:8080"
+basePath: "/v1/calculator"
+schemes:
+- "http"
+paths:
+  /evaluate/{operator}:
+    post:
+      operationId: "evaluate"
+      description: "Evaluate a simple expression on the calculator service passing in operands and operator."                   
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "operator"
+        type: "string"
+        required: true
+        description: "operator of expression"
+      - in: "query"
+        name: "firstOperand"
+        description: "left side of operator"
+        required: true
+        type: "number"
+        format: "double"
+      - in: "query"
+        name: "secondOperand"
+        description: "right side of operator"
+        type: "number"
+        format: "double"
+        required: true
+      responses:
+        200:
+          description: "evaluated result"
+          schema:
+            $ref: '#/definitions/Result'
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+      summary: "Evaluates expression"
+  /audit:
+    get:
+      operationId: "audit"
+      description: "Audit all expressions evaluated."
+      summary: "Audit logs"
+      produces:
+      - "application/json"
+      security:
+        - basicAuth: []
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Result"
+        "400":
+          description: "Invalid tag value"
+securityDefinitions:
+  basicAuth:
+    type: basic
+definitions:
+  Result:
+    type: object
+    required:
+    - expression
+    - value
+    properties:
+      expression:
+        type: string
+        format: string
+        example: 10 + 3
+      value:
+        type: number
+        format: double
+        example: 13

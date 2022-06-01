@@ -7,7 +7,7 @@ import io.calculatorapi.services.CalculatorService;
 import javax.ws.rs.*;
 import java.util.List;
 
-@Path("/")
+@Path("/v1/calculator")
 @Produces("application/json")
 public class CalculatorResource {
     private CalculatorService calculatorService;

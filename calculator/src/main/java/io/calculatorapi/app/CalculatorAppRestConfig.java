@@ -19,7 +19,7 @@ public class CalculatorAppRestConfig extends RestConfig {
         updates.put(AUTHENTICATION_METHOD_CONFIG, AUTHENTICATION_METHOD_BASIC);
         updates.put(AUTHENTICATION_REALM_CONFIG, ServiceLoginModule.SERVICE_REALM);
         updates.put(AUTHENTICATION_ROLES_CONFIG, java.util.List.of(ServiceLoginModule.ADMIN_ROLE));
-        updates.put(AUTHENTICATION_SKIP_PATHS, "/evaluate/*");
+        updates.put(AUTHENTICATION_SKIP_PATHS, "/openapi/*,/v1/calculator/evaluate/*");
 
         return updates;
     }

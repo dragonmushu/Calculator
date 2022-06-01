@@ -5,16 +5,19 @@ import javax.ws.rs.core.Configurable;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.calculatorapi.exceptionhandler.ServiceExceptionHandler;
 import io.calculatorapi.resources.CalculatorResource;
+import io.calculatorapi.resources.SwaggerResource;
 import io.confluent.rest.Application;
 import io.confluent.rest.validation.JacksonMessageBodyProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
 public class CalculatorApplication extends Application<CalculatorAppRestConfig> {
-    public static final String BASE_API_PATH = "/v1/calculator";
+    private static final Logger log = LoggerFactory.getLogger(CalculatorApplication.class);
 
     public CalculatorApplication() {
-        super(new CalculatorAppRestConfig(), BASE_API_PATH);
+        super(new CalculatorAppRestConfig());
     }
 
     @Override
@@ -25,6 +28,7 @@ public class CalculatorApplication extends Application<CalculatorAppRestConfig> 
         context.register(jsonProvider);
         context.register(new ServiceExceptionHandler());
         context.register(new CalculatorResource());
+        context.register(new SwaggerResource());
     }
 
     public static void main(String[] args) {
@@ -38,6 +42,7 @@ public class CalculatorApplication extends Application<CalculatorAppRestConfig> 
             // start application
             CalculatorApplication app = new CalculatorApplication();
             app.start();
+            log.info("Started listening on port 8080...");
             app.join();
         } catch (Exception e) {
             System.exit(1);
